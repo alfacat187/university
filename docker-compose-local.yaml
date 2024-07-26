@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+  db:
+    container_name: 'my_postgres'
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=alfacat187
+      - POSTGRES_PASSWORD=alfacat
+      - POSTGRES_DB=academy
+    ports:
+      - '5432:5432'
+    networks:
+      - custom
+
+networks:
+  custom:
+    driver: bridge

@@ -1,0 +1,22 @@
+START
+
+#работа с alembic
+инициализация:
+- alembic init migrations
+далее идем а alembic.ini -> добавляем url к бд *я так понимаю, раз инициализация была в проекте с sqlalchemy, то там и появилась строчка для настройки дазы с sqlalchemy
+
+sqlalchemy.url = driver://user:pass@localhost/dbname
+меняем без ковычек -> sqlalchemy.url = postgresql://alfacat187:alfacat@localhost:5432/academy * нужно установить psycopg2 - устарел -> psycopg2-binary явно передавать
+sqlalchemy.url = postgresql+psycopg2-binary - не обязательно, просто установи пакет -> poetry add psycopg2-bynary
+
+- идем в migrations -> env.py -> строка from myapp import mymodel
+импортируем нашу Base -> class Base(DeclarativeBase)
+target_metadata = Base.metadata
+
+- вводим в терменале -> alembic revision --autogenerate -m 'комментарий, например, create table users'
+
+-> в migrations -> versions появится файл, то есть будет создана миграция
+
+- запускаем миграции -> alembic upgrade heads -> создадуться таблицы + alembic_version
+
+END
